@@ -1,0 +1,40 @@
+package tbasilio.tests;
+
+import org.testng.Assert;
+
+import org.testng.annotations.Test;
+import tbasilio.tests.testcomponents.BaseTest;
+import tbasilio.pages.CartPage;
+import tbasilio.pages.ProductCataloguePage;
+import tbasilio.tests.testcomponents.Retry;
+
+import java.io.IOException;
+
+public class ErrorValidationsTest extends BaseTest {
+
+
+    @Test(groups = {"errorHandling"}, retryAnalyzer = Retry.class)
+    public void loginErrorValidation() throws IOException {
+
+        ProductCataloguePage cataloguePage = landingPage
+                .loginApplication("anshika@gmail.com", "Iamki000");
+
+        Assert.assertEquals(landingPage.getErrorMessage(), "Incorrect email password.");
+    }
+
+    @Test
+    public void productErrorValidation() throws IOException {
+
+        String productName = "IPHONE 13 PRO";
+        ProductCataloguePage cataloguePage = landingPage
+                .loginApplication("rahulshetty@gmail.com", "Iamking@000");
+
+        var products = cataloguePage.getProductList();
+        products.forEach(p -> System.out.println(p.getText()));
+        cataloguePage.addProductToCart(productName);
+
+        CartPage cartPage = cataloguePage.goToCartPage();
+        Assert.assertFalse(cartPage.verifyProductDisplay(productName+"AA"));
+    }
+
+}
