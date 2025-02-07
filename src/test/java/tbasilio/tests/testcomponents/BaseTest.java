@@ -36,6 +36,9 @@ public class BaseTest {
         } else if (browserName.equalsIgnoreCase("edge")) {
             driver = new EdgeDriver();
         } else {
+            String finalPath = System.getProperty("os.name")
+                    .contains("Windows") ? "windows/geckodriver.exe" : "linux/geckodriver";
+            System.getProperty("webdriver.gecko.driver","src/test/resources/drivers/" + finalPath);
             driver = new FirefoxDriver();
         }
 
