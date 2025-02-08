@@ -38,14 +38,16 @@ public class BaseTest {
 
             driver = new ChromeDriver(new ChromeOptions()
                     .setBinary("/usr/bin/google-chrome")
-                    .addArguments("--no-sandbox", "--disable-dev-shm-usage"));
+                    .addArguments("--no-sandbox", "--disable-dev-shm-usage",
+                            "--user-data-dir=~/chrome-profile"));
 
         } else if (browserName.equalsIgnoreCase("edge")) {
             System.setProperty("webdriver.edge.driver",
                     "src/test/resources/drivers/linux/msedgedriver");
             driver = new EdgeDriver(new EdgeOptions()
                     .setBinary("/usr/bin/microsoft-edge")
-                    .addArguments("--no-sandbox", "--disable-dev-shm-usage"));
+                    .addArguments("--no-sandbox", "--disable-dev-shm-usage",
+                            "--user-data-dir=~/edge-profile"));
         } else {
             driver = new FirefoxDriver();
         }
