@@ -8,13 +8,12 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import tbasilio.pages.LandingPage;
 
 import java.time.Duration;
 
 public class StandAloneTest {
 
-    public static void main(String[] args) {
+    public static void main(Teste[] args) {
 
         String productName = "BANARSI SAREE";
         WebDriver driver = new EdgeDriver();

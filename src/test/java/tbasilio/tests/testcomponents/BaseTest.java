@@ -2,6 +2,7 @@ package tbasilio.tests.testcomponents;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -38,14 +39,16 @@ public class BaseTest {
 
             System.setProperty("webdriver.chrome.driver",
                     PREFIXPATH + "/src/test/resources/drivers/"+ os +"/chromedriver" + extension);
+            WebDriverManager.chromedriver().clearDriverCache().setup();
             driver = new ChromeDriver(new ChromeOptions()
                     .addArguments("--user-data-dir=~/.config/google-chrome",
                             "--headless", "--no-sandbox", "--disable-gpu"));
 
         } else if (browserName.equalsIgnoreCase("edge")) {
+            WebDriverManager.edgedriver().clearDriverCache().setup();
             driver = new EdgeDriver();
         } else {
-
+            WebDriverManager.firefoxdriver().clearDriverCache().setup();
             System.setProperty("webdriver.gecko.driver",
                     PREFIXPATH + "/src/test/resources/drivers/"+ os +"/geckodriver" + extension);
             driver = new FirefoxDriver(new FirefoxOptions()
