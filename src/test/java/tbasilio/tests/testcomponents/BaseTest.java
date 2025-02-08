@@ -38,7 +38,7 @@ public class BaseTest {
 
             driver = new ChromeDriver(new ChromeOptions()
                     .setBinary("/usr/bin/google-chrome")
-                    .addArguments("--no-sandbox", "--disable-dev-shm-usage");
+                    .addArguments("--no-sandbox", "--disable-dev-shm-usage"));
 
         } else if (browserName.equalsIgnoreCase("edge")) {
             System.setProperty("webdriver.edge.driver",
