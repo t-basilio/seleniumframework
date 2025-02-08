@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.annotations.AfterMethod;
@@ -36,15 +37,17 @@ public class BaseTest {
         if(browserName.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().clearDriverCache().setup();
             driver = new ChromeDriver(new ChromeOptions()
+                    .addArguments("--no-sandbox", "--disable-dev-shm-usage")
                     .setBinary("/opt/google/chrome/chrome"));
 
         } else if (browserName.equalsIgnoreCase("edge")) {
             WebDriverManager.edgedriver().clearDriverCache().setup();
-            driver = new EdgeDriver();
+            driver = new EdgeDriver(new EdgeOptions()
+                    .addArguments("--no-sandbox", "--disable-dev-shm-usage")
+                    .setBinary("/opt/microsoft/msedge/msedge"));
         } else {
             WebDriverManager.firefoxdriver().clearDriverCache().setup();
-            driver = new FirefoxDriver(new FirefoxOptions()
-                    .setBinary("/opt/microsoft/msedge/msedge"));
+            driver = new FirefoxDriver();
         }
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
