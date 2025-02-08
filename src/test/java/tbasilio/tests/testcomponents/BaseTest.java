@@ -2,11 +2,13 @@ package tbasilio.tests.testcomponents;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
@@ -14,7 +16,6 @@ import org.testng.annotations.BeforeMethod;
 import tbasilio.pages.LandingPage;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
@@ -30,16 +31,22 @@ public class BaseTest {
 
         String browserCLI = System.getProperty("browser");
         String browserName = browserCLI != null ? browserCLI : InitialProperties.getProperty("browser");
+        String os = System.getProperty("os.name").contains("Windows") ? "windows" : "linux";
+        String extension = !os.equals("windows") ? "" : ".exe";
 
         if(browserName.equalsIgnoreCase("chrome")) {
-            driver = new ChromeDriver();
+
+            System.getProperty("webdriver.chrome.driver",
+                    "src/test/resources/drivers/"+ os +"/chromedriver" + extension);
+            driver = new ChromeDriver(new ChromeOptions()
+                    .addArguments("--user-data-dir=~/.config/google-chrome"));
+
         } else if (browserName.equalsIgnoreCase("edge")) {
             driver = new EdgeDriver();
         } else {
-            String finalPath = System.getProperty("os.name")
-                    .contains("Windows") ? "windows/geckodriver.exe" : "linux/geckodriver";
-            System.out.println("PATH: " + finalPath);
-            System.getProperty("webdriver.gecko.driver","src/test/resources/drivers/"  + finalPath);
+
+            System.getProperty("webdriver.gecko.driver",
+                    "src/test/resources/drivers/"+ os +"/geckodriver" + extension);
             driver = new FirefoxDriver();
         }
 
