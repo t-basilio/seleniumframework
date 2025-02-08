@@ -13,7 +13,7 @@ import java.io.IOException;
 public class ErrorValidationsTest extends BaseTest {
 
 
-    @Test(groups = {"errorHandling"}, retryAnalyzer = Retry.class)
+    @Test(groups = {"errorHandling"})
     public void loginErrorValidation() throws IOException {
 
         ProductCataloguePage cataloguePage = landingPage
@@ -25,7 +25,7 @@ public class ErrorValidationsTest extends BaseTest {
     @Test
     public void productErrorValidation() throws IOException {
 
-        String productName = "IPHONE 13 PRO";
+        String productName = "LAPTOP";
         ProductCataloguePage cataloguePage = landingPage
                 .loginApplication("rahulshetty@gmail.com", "Iamking@000");
 

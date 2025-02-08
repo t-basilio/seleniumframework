@@ -5,14 +5,15 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import tbasilio.tests.testcomponents.BaseTest;
 import tbasilio.pages.*;
+import tbasilio.tests.testcomponents.Retry;
 
 import java.io.IOException;
 import java.util.*;
 
 public class SubmitOrderTest extends BaseTest {
-    String productName = "IPHONE 13 PRO";
+    String productName = "BANARSI SAREE";
 
-    @Test(dataProvider = "getData", groups = {"purchase"})
+    @Test(dataProvider = "getData", groups = {"purchase"}, retryAnalyzer = Retry.class)
     public void submitOrder(HashMap<String, String> input) throws IOException {
 
         ProductCataloguePage cataloguePage = landingPage
