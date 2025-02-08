@@ -36,7 +36,7 @@ public class BaseTest {
         if(browserName.equalsIgnoreCase("chrome")) {
 
             System.setProperty("webdriver.chrome.driver",
-                    "src/test/resources/drivers/"+ os +"/chromedriver" + extension);
+                    PREFIXPATH + "/src/test/resources/drivers/"+ os +"/chromedriver" + extension);
             driver = new ChromeDriver(new ChromeOptions()
                     .addArguments("--user-data-dir=~/.config/google-chrome"));
 
@@ -45,7 +45,7 @@ public class BaseTest {
         } else {
 
             System.setProperty("webdriver.gecko.driver",
-                    "src/test/resources/drivers/"+ os +"/geckodriver" + extension);
+                    PREFIXPATH + "/src/test/resources/drivers/"+ os +"/geckodriver" + extension);
             driver = new FirefoxDriver();
         }
 
