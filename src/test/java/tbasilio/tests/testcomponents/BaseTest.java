@@ -36,9 +36,7 @@ public class BaseTest {
         if(browserName.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().clearDriverCache().setup();
             driver = new ChromeDriver(new ChromeOptions()
-                    .setBinary("/opt/google/chrome/chrome")
-                    .addArguments("--user-data-dir=~/.config/google-chrome",
-                            "--headless", "--no-sandbox", "--disable-gpu"));
+                    .setBinary("/opt/google/chrome/chrome"));
 
         } else if (browserName.equalsIgnoreCase("edge")) {
             WebDriverManager.edgedriver().clearDriverCache().setup();
@@ -46,8 +44,7 @@ public class BaseTest {
         } else {
             WebDriverManager.firefoxdriver().clearDriverCache().setup();
             driver = new FirefoxDriver(new FirefoxOptions()
-                    .setBinary("/opt/microsoft/msedge/msedge")
-                    .addArguments("--headless", "--no-sandbox", "--disable-gpu"));
+                    .setBinary("/opt/microsoft/msedge/msedge"));
         }
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
