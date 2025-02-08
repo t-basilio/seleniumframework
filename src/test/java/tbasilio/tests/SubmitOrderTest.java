@@ -47,7 +47,9 @@ public class SubmitOrderTest extends BaseTest {
 
         List<HashMap<String, String>> data = getJsonDataToMap("src/test/java/tbasilio/data/purchaseOrder.json");
         // you can add manually HashMaps like this: data.get(0), data.get(1) ...etc
-        return new Object[][] { { data.get(0) }, { data.get(1) } };
+        return data.stream()
+                .map(hp -> new HashMap[]{hp})
+                .toArray(HashMap[][]::new);
         /*
         var map = new HashMap<String, String>();
         map.put("email", "anshika@gmail.com");
