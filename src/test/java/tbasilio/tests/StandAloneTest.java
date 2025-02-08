@@ -13,7 +13,7 @@ import java.time.Duration;
 
 public class StandAloneTest {
 
-    public static void main(Teste[] args) {
+    public static void main(String[] args) {
 
         String productName = "BANARSI SAREE";
         WebDriver driver = new EdgeDriver();
