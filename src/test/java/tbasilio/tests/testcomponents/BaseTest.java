@@ -11,7 +11,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import tbasilio.pages.LandingPage;
@@ -34,16 +33,21 @@ public class BaseTest {
         String browserName = browserCLI != null ? browserCLI : InitialProperties.getProperty("browser");
 
         if(browserName.equalsIgnoreCase("chrome")) {
+            System.setProperty("webdriver.chrome.driver",
+                    "src/test/resources/drivers/linux/chromedriver");
 
             driver = new ChromeDriver(new ChromeOptions()
-                    .addArguments("--no-sandbox", "--disable-dev-shm-usage")
-                    .setBinary("/usr/bin/google-chrome"));
+                    .setBinary("/usr/bin/google-chrome")
+                    .addArguments("--no-sandbox", "--disable-dev-shm-usage",
+                            "--user-data-dir=~/.config/google-chrome"));
 
         } else if (browserName.equalsIgnoreCase("edge")) {
-
+            System.setProperty("webdriver.edge.driver",
+                    "src/test/resources/drivers/linux/msedgedriver");
             driver = new EdgeDriver(new EdgeOptions()
-                    .addArguments("--no-sandbox", "--disable-dev-shm-usage")
-                    .setBinary("/usr/bin/microsoft-edge"));
+                    .setBinary("/usr/bin/microsoft-edge")
+                    .addArguments("--no-sandbox", "--disable-dev-shm-usage",
+                            "--user-data-dir=~/.config/microsoft-edge"));
         } else {
             driver = new FirefoxDriver();
         }
