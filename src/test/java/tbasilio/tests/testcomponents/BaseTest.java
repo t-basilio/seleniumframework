@@ -11,6 +11,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import tbasilio.pages.LandingPage;
@@ -31,21 +32,34 @@ public class BaseTest {
 
         String browserCLI = System.getProperty("browser");
         String browserName = browserCLI != null ? browserCLI : InitialProperties.getProperty("browser");
+        String os = System.getProperty("os.name").contains("Windows") ? "windows" : "linux";
+        String driverPath;
 
         if(browserName.equalsIgnoreCase("chrome")) {
-            System.setProperty("webdriver.chrome.driver",
-                    "src/test/resources/drivers/linux/chromedriver");
+
+            driverPath = "src/test/resources/drivers/%s/chromedriver%s"
+                    .formatted(os, os.equals("windows") ? ".exe" : "");
+            System.setProperty("webdriver.chrome.driver", driverPath);
 
             driver = new ChromeDriver(new ChromeOptions()
                     .addArguments("--no-sandbox", "disable-gpu", "--headless"));
 
         } else if (browserName.equalsIgnoreCase("edge")) {
-            System.setProperty("webdriver.edge.driver",
-                    "src/test/resources/drivers/linux/msedgedriver");
+
+            driverPath = "src/test/resources/drivers/%s/msedgedriver%s"
+                    .formatted(os, os.equals("windows") ? ".exe" : "");
+            System.setProperty("webdriver.edge.driver", driverPath);
+
             driver = new EdgeDriver(new EdgeOptions()
                     .addArguments("--no-sandbox", "disable-gpu", "--headless"));
         } else {
-            driver = new FirefoxDriver();
+
+            driverPath = "src/test/resources/drivers/%s/geckodriver%s"
+                    .formatted(os, os.equals("windows") ? ".exe" : "");
+            System.setProperty("webdriver.gecko.driver", driverPath);
+
+            driver = new FirefoxDriver(new FirefoxOptions()
+                    .addArguments("--no-sandbox", "disable-gpu", "--headless"));
         }
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
