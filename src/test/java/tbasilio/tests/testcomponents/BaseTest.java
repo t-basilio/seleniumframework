@@ -34,9 +34,9 @@ public class BaseTest {
         String browserName = browserCLI != null ? browserCLI : InitialProperties.getProperty("browser");
 
         if(browserName.equalsIgnoreCase("chrome")) {
-
             WebDriverManager.chromedriver().clearDriverCache().setup();
             driver = new ChromeDriver(new ChromeOptions()
+                    .setBinary("/opt/google/chrome/chrome")
                     .addArguments("--user-data-dir=~/.config/google-chrome",
                             "--headless", "--no-sandbox", "--disable-gpu"));
 
@@ -46,6 +46,7 @@ public class BaseTest {
         } else {
             WebDriverManager.firefoxdriver().clearDriverCache().setup();
             driver = new FirefoxDriver(new FirefoxOptions()
+                    .setBinary("/opt/microsoft/msedge/msedge")
                     .addArguments("--headless", "--no-sandbox", "--disable-gpu"));
         }
 
