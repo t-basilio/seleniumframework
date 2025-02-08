@@ -31,7 +31,7 @@ public class BaseTest {
         String browserCLI = System.getProperty("browser");
         String browserName = browserCLI != null ? browserCLI : InitialProperties.getProperty("browser");
         String os = System.getProperty("os.name").contains("Windows") ? "windows" : "linux";
-        String extension = !os.equals("windows") ? "" : ".exe";
+        String extension =  ".exe";
 
         if(browserName.equalsIgnoreCase("chrome")) {
 
