@@ -12,5 +12,5 @@ Feature: Purchase the order from Ecommerce Website
     Then "THANKYOU FOR THE ORDER." message is displayed on confirmation page
 
     Examples:
-    | username         | password    | productName   |
-    | shetty@gmail.com | Iamking@000 | IPHONE 13 PRO |
+    | username         | password    | productName |
+    | shetty@gmail.com | Iamking@000 | QWERTY      |

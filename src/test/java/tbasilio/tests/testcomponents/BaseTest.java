@@ -32,13 +32,9 @@ public class BaseTest {
 
         String browserCLI = System.getProperty("browser");
         String browserName = browserCLI != null ? browserCLI : InitialProperties.getProperty("browser");
-        String os = System.getProperty("os.name").contains("Windows") ? "windows" : "linux";
-        String extension = !os.equals("windows") ? "" : ".exe";
 
         if(browserName.equalsIgnoreCase("chrome")) {
 
-            System.setProperty("webdriver.chrome.driver",
-                    PREFIXPATH + "/src/test/resources/drivers/"+ os +"/chromedriver" + extension);
             WebDriverManager.chromedriver().clearDriverCache().setup();
             driver = new ChromeDriver(new ChromeOptions()
                     .addArguments("--user-data-dir=~/.config/google-chrome",
@@ -49,8 +45,6 @@ public class BaseTest {
             driver = new EdgeDriver();
         } else {
             WebDriverManager.firefoxdriver().clearDriverCache().setup();
-            System.setProperty("webdriver.gecko.driver",
-                    PREFIXPATH + "/src/test/resources/drivers/"+ os +"/geckodriver" + extension);
             driver = new FirefoxDriver(new FirefoxOptions()
                     .addArguments("--headless", "--no-sandbox", "--disable-gpu"));
         }
