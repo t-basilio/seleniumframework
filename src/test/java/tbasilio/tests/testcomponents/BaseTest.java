@@ -37,14 +37,12 @@ public class BaseTest {
                     "src/test/resources/drivers/linux/chromedriver");
 
             driver = new ChromeDriver(new ChromeOptions()
-                    .setBinary("/usr/bin/google-chrome")
                     .addArguments("--no-sandbox", "disable-gpu", "--headless"));
 
         } else if (browserName.equalsIgnoreCase("edge")) {
             System.setProperty("webdriver.edge.driver",
                     "src/test/resources/drivers/linux/msedgedriver");
             driver = new EdgeDriver(new EdgeOptions()
-                    .setBinary("/usr/bin/microsoft-edge")
                     .addArguments("--no-sandbox", "disable-gpu", "--headless"));
         } else {
             driver = new FirefoxDriver();
