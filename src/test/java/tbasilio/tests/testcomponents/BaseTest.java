@@ -38,13 +38,13 @@ public class BaseTest {
             WebDriverManager.chromedriver().clearDriverCache().setup();
             driver = new ChromeDriver(new ChromeOptions()
                     .addArguments("--no-sandbox", "--disable-dev-shm-usage")
-                    .setBinary("/opt/google/chrome/chrome"));
+                    .setBinary("/usr/bin/google-chrome"));
 
         } else if (browserName.equalsIgnoreCase("edge")) {
             WebDriverManager.edgedriver().clearDriverCache().setup();
             driver = new EdgeDriver(new EdgeOptions()
                     .addArguments("--no-sandbox", "--disable-dev-shm-usage")
-                    .setBinary("/opt/microsoft/msedge/msedge"));
+                    .setBinary("/usr/bin/microsoft-edge"));
         } else {
             WebDriverManager.firefoxdriver().clearDriverCache().setup();
             driver = new FirefoxDriver();
