@@ -38,6 +38,7 @@ public class BaseTest {
         } else {
             String finalPath = System.getProperty("os.name")
                     .contains("Windows") ? "windows/geckodriver.exe" : "linux/geckodriver";
+            System.out.println("PATH: " + finalPath);
             System.getProperty("webdriver.gecko.driver","src/test/resources/drivers/"  + finalPath);
             driver = new FirefoxDriver();
         }
