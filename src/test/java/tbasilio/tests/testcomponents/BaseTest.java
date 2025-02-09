@@ -33,30 +33,27 @@ public class BaseTest {
         String browserCLI = System.getProperty("browser");
         String browserName = browserCLI != null ? browserCLI : InitialProperties.getProperty("browser");
         String os = System.getProperty("os.name").contains("Windows") ? "windows" : "linux";
-        String driverPath;
+        String driverPath = "src/test/resources/drivers/%s/%s%s";
 
         if(browserName.equalsIgnoreCase("chrome")) {
 
-            driverPath = "src/test/resources/drivers/%s/chromedriver%s"
-                    .formatted(os, os.equals("windows") ? ".exe" : "");
-            System.setProperty("webdriver.chrome.driver", driverPath);
+            System.setProperty("webdriver.chrome.driver", driverPath
+                    .formatted(os, "chromedriver", os.equals("windows") ? ".exe" : ""));
 
             driver = new ChromeDriver(new ChromeOptions()
                     .addArguments("--no-sandbox", "disable-gpu", "--headless"));
 
         } else if (browserName.equalsIgnoreCase("edge")) {
 
-            driverPath = "src/test/resources/drivers/%s/msedgedriver%s"
-                    .formatted(os, os.equals("windows") ? ".exe" : "");
-            System.setProperty("webdriver.edge.driver", driverPath);
+            System.setProperty("webdriver.edge.driver", driverPath
+                    .formatted(os, "msedgedriver", os.equals("windows") ? ".exe" : ""));
 
             driver = new EdgeDriver(new EdgeOptions()
                     .addArguments("--no-sandbox", "disable-gpu", "--headless"));
         } else {
 
-            driverPath = "src/test/resources/drivers/%s/geckodriver%s"
-                    .formatted(os, os.equals("windows") ? ".exe" : "");
-            System.setProperty("webdriver.gecko.driver", driverPath);
+            System.setProperty("webdriver.gecko.driver", driverPath
+                    .formatted(os, "geckodriver", os.equals("windows") ? ".exe" : ""));
 
             driver = new FirefoxDriver(new FirefoxOptions()
                     .addArguments("--no-sandbox", "disable-gpu", "--headless"));
