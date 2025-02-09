@@ -7,8 +7,6 @@
   <name>Archetype - SeleniumFrameworkDesign</name>
   <url>http://maven.apache.org</url>
 
-  status
-
   <dependencies>
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
