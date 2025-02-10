@@ -3,13 +3,10 @@ package tbasilio.tests.testcomponents;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.model.Media;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-
-import java.io.File;
 import java.util.Arrays;
 
 public class TestListener extends BaseTest implements ITestListener {
@@ -39,9 +36,6 @@ public class TestListener extends BaseTest implements ITestListener {
 
         String testName = formatTestName(result.getName());
         String productName = convertParameterToProductName(result.getParameters());
-
-
-
         String filePath = null;
         try {
             //get driver on current context for pass argument to screenshot
