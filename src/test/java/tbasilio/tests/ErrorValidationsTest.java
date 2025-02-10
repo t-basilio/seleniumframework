@@ -1,12 +1,10 @@
 package tbasilio.tests;
 
 import org.testng.Assert;
-
 import org.testng.annotations.Test;
 import tbasilio.tests.testcomponents.BaseTest;
 import tbasilio.pages.CartPage;
 import tbasilio.pages.ProductCataloguePage;
-import tbasilio.tests.testcomponents.Retry;
 
 import java.io.IOException;
 

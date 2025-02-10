@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class SubmitOrderTest extends BaseTest {
-    String productName = "BANARSI SAREE";
+    String productName = "IPHONE";
 
     @Test(dataProvider = "getData", groups = {"purchase"}, retryAnalyzer = Retry.class)
     public void submitOrder(HashMap<String, String> input) throws IOException {
@@ -20,7 +20,9 @@ public class SubmitOrderTest extends BaseTest {
                 .loginApplication(input.get("email"), input.get("password"));
 
         var products = cataloguePage.getProductList();
+        System.out.println("Products on Catalogue Page");
         products.forEach(p -> System.out.println(p.getText()));
+
         cataloguePage.addProductToCart(input.get("product"));
 
         CartPage cartPage = cataloguePage.goToCartPage();
@@ -37,7 +39,7 @@ public class SubmitOrderTest extends BaseTest {
     @Test(dependsOnMethods = {"submitOrder"})
     public void orderHistoryTest() {
         ProductCataloguePage cataloguePage = landingPage
-                .loginApplication("anshika@gmail.com", "Iamking@000");
+                .loginApplication("automation@selenium.com", "Selenium@123");
         OrdersPage ordersPage = cataloguePage.goToOrdersPage();
 
         Assert.assertTrue(ordersPage.verifyOrdersDisplay(productName));
