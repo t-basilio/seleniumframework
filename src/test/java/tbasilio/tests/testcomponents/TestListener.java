@@ -8,6 +8,8 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import java.util.Arrays;
+
 public class TestListener extends BaseTest implements ITestListener {
 
     ExtentTest test;
@@ -22,7 +24,11 @@ public class TestListener extends BaseTest implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        extentTest.get().log(Status.PASS, "Test Passed");
+        String testName = result.getName().replaceAll("([A-Z])", " $1");
+        testName = testName.substring(0, 1).toUpperCase() + testName.substring(1);
+
+        String productName = convertParameterToProductName(result.getParameters());
+        extentTest.get().log(Status.PASS, testName.concat(" " + productName));
     }
 
     @Override
@@ -50,5 +56,17 @@ public class TestListener extends BaseTest implements ITestListener {
     @Override
     public void onFinish(ITestContext context) {
         extent.flush();
+    }
+
+    private String convertParameterToProductName(Object[] parameters) {
+        String productName = Arrays.stream(parameters)
+                .map(Object::toString).findFirst().orElse("");
+
+        if(!productName.isBlank() && productName.contains("product")) {
+            return productName.split("product")[1]
+                    .split(",")[0].substring(1);
+        }
+
+        return productName;
     }
 }

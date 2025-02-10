@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class SubmitOrderTest extends BaseTest {
-    String productName = "BANARSI SAREE";
+    String productName = "QWERTY";
 
     @Test(dataProvider = "getData", groups = {"purchase"}, retryAnalyzer = Retry.class)
     public void submitOrder(HashMap<String, String> input) throws IOException {
