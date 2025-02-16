@@ -1,4 +1,4 @@
-package tbasilio.pagecomponents;
+package tbasilio.pages.pagecomponents;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,7 +12,7 @@ import tbasilio.pages.OrdersPage;
 
 import java.time.Duration;
 
-public class AbstractPageComponent {
+public abstract class AbstractPageComponent {
 
     WebDriver driver;
     WebDriverWait wait;
